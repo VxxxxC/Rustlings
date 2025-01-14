@@ -5,6 +5,17 @@ fn array_and_vec() -> ([i32; 4], Vec<i32>) {
     // Use the vector macro.
     // let v = ???;
 
+    let v = vec![10, 20, 30, 40];
+    // let mut v: Vec<i32> = Vec::new();
+    // for i in 0..a.len() {
+    //     v.push(a[i]);
+    // }
+
+    for i in &v {
+        print!("value : {} ", i);
+    }
+    // println!("a : {:#?}", a);
+    // println!("v : {:#?}", v);
     (a, v)
 }
 

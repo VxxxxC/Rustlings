@@ -1,5 +1,10 @@
 fn main() {
     // You can optionally experiment here.
+    let num = (2, 4, 6);
+
+    let four = num.1;
+
+    println!("num : {:?} , four : {:?}", num, four);
 }
 
 #[cfg(test)]
@@ -11,6 +16,7 @@ mod tests {
         // TODO: Use a tuple index to access the second element of `numbers`
         // and assign it to a variable called `second`.
         // let second = ???;
+        let second = numbers.1;
 
         assert_eq!(second, 2, "This is not the 2nd number in the tuple!");
     }
