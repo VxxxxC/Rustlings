@@ -8,6 +8,17 @@ fn fill_vec(vec: Vec<i32>) -> Vec<i32> {
 
 fn main() {
     // You can optionally experiment here.
+    let temp_vec: Vec<i32> = vec![1, 2, 3, 8, 9, 10];
+    println!("vec : {:?}", temp_vec);
+
+    for i in &temp_vec {
+        println!("loop over : {:}", i * 3);
+    }
+
+    for (index, item) in temp_vec.iter().enumerate() {
+        let sum = temp_vec[index] + item;
+        println!("loop index : {:} , sum => {:}", temp_vec[index], sum);
+    }
 }
 
 #[cfg(test)]
@@ -20,7 +31,7 @@ mod tests {
     fn move_semantics2() {
         let vec0 = vec![22, 44, 66];
 
-        let vec1 = fill_vec(vec0);
+        let vec1 = fill_vec(vec0.clone());
 
         assert_eq!(vec0, [22, 44, 66]);
         assert_eq!(vec1, [22, 44, 66, 88]);
