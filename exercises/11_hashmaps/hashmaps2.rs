@@ -35,11 +35,12 @@ fn fruit_basket(basket: &mut HashMap<Fruit, u32>) {
         // already present!
 
         basket.entry(fruit).or_insert(5);
+
         // for content in basket.clone().iter() {
         //     if fruit != *content.0 {
         //         basket.entry(fruit.clone()).or_insert(10);
         //     }
-        // }
+        // } // NOTE: This is also works , but with my dumb way
     }
 
     println!("basket : {:?}", basket);
