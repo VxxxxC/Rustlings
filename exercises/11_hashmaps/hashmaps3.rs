@@ -9,7 +9,7 @@
 use std::collections::HashMap;
 
 // A structure to store the goal details of a team.
-#[derive(Default)]
+#[derive(Default, Debug)]
 struct TeamScores {
     goals_scored: u8,
     goals_conceded: u8,
@@ -21,11 +21,38 @@ fn build_scores_table(results: &str) -> HashMap<&str, TeamScores> {
 
     for line in results.lines() {
         let mut split_iterator = line.split(',');
+
         // NOTE: We use `unwrap` because we didn't deal with error handling yet.
         let team_1_name = split_iterator.next().unwrap();
         let team_2_name = split_iterator.next().unwrap();
         let team_1_score: u8 = split_iterator.next().unwrap().parse().unwrap();
         let team_2_score: u8 = split_iterator.next().unwrap().parse().unwrap();
+
+        // scores
+        //     .entry(team_1_name)
+        //     .and_modify(|v| {
+        //         v.goals_scored += team_1_score;
+        //         v.goals_conceded += team_2_score;
+        //     })
+        //     .or_default();
+
+        // scores
+        //     .entry(team_2_name)
+        //     .and_modify(|v| {
+        //         v.goals_scored += team_2_score;
+        //         v.goals_conceded += team_1_score;
+        //     })
+        //     .or_default();
+
+        let team_1 = scores.entry(team_1_name).or_default();
+        team_1.goals_scored += team_1_score;
+        team_1.goals_conceded += team_2_score;
+
+        let team_2 = scores.entry(team_2_name).or_default();
+        team_2.goals_scored += team_2_score;
+        team_2.goals_conceded += team_1_score;
+
+        println!("scores : {:?}", scores);
 
         // TODO: Populate the scores table with the extracted details.
         // Keep in mind that goals scored by team 1 will be the number of goals
@@ -37,6 +64,13 @@ fn build_scores_table(results: &str) -> HashMap<&str, TeamScores> {
 }
 
 fn main() {
+    const RESULTS: &str = "England,France,42,25
+France,Italy,35,1
+Poland,Spain,20,5
+Germany,England,10,1
+England,Spain,5,0";
+
+    println!("SCORES : {:?}", build_scores_table(RESULTS));
     // You can optionally experiment here.
 }
 
